@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -73,6 +72,10 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+            <properties>
+                <gpg.executable>gpg</gpg.executable>
+                <gpg.passphrase>3A8B46E1484CD738A007FF9025C05D809073D230</gpg.passphrase>
+            </properties>
             <build>
                 <plugins>
                     <!-- 生成源码包 -->
@@ -192,7 +195,7 @@
     <scm>
         <connection>scm:git:git@github.com:geemu/commons.git</connection>
         <developerConnection>scm:git:git@github.com:geemu/commons.git</developerConnection>
-        <url>https://github.com/geemu/commons.git</url>
+        <url>https://github.com/geemu/commons</url>
         <tag>${scm.tag.version}</tag>
     </scm>
 
