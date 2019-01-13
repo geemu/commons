@@ -4,42 +4,29 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>lang</module>
-    </modules>
-
     <groupId>com.github.geemu</groupId>
     <artifactId>commons-parent</artifactId>
     <version>1.0.0</version>
+    <packaging>pom</packaging>
+
     <name>commons</name>
     <description>常用Java工具类</description>
     <url>https://github.com/geemu/commons-parent/</url>
 
+    <!-- 项目模块 -->
+    <modules>
+        <module>lang</module>
+    </modules>
+
+    <!-- 项目属性配置 -->
     <properties>
-        <!-- 文件拷贝时的编码 -->
+        <scm.tag.version>1.0.0</scm.tag.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <!-- 插件版本控制  -->
-        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
-        <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
-        <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
-        <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
-        <!-- GPG自动签名插件 -->
-        <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-        <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
+        <java.version>1.8</java.version>
         <!-- 版本控制 -->
         <junit.version>4.12</junit.version>
     </properties>
-    <!-- 依赖 -->
-    <dependencies>
-        <!-- 全局单元测试 -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-    </dependencies>
 
     <!-- 依赖管理 -->
     <dependencyManagement>
@@ -53,24 +40,34 @@
         </dependencies>
     </dependencyManagement>
 
+    <!-- 依赖 -->
+    <dependencies>
+        <!-- 全局单元测试 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+    </dependencies>
+
+    <!-- 构建 -->
     <build>
         <plugins>
-            <!-- 编译插件 -->
+            <!-- 编译 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
+                <version>3.8.0</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-            <!-- Javadoc -->
+            <!-- 生成Javadoc -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${maven-javadoc-plugin.version}</version>
+                <version>3.0.1</version>
                 <configuration>
                     <charset>UTF-8</charset>
                     <encoding>UTF-8</encoding>
@@ -87,27 +84,27 @@
         </plugins>
     </build>
 
-    <distributionManagement>
-        <snapshotRepository>
-            <id>oss</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-        </snapshotRepository>
-        <repository>
-            <id>oss</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
-
+    <!-- 不同环境打包 -->
     <profiles>
         <profile>
             <id>release</id>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>oss</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+                </snapshotRepository>
+                <repository>
+                    <id>oss</id>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
             <build>
                 <plugins>
-                    <!-- 生成source源码包的插件 -->
+                    <!-- 生成源码包 -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
-                        <version>${maven-source-plugin.version}</version>
+                        <version>3.0.1</version>
                         <configuration>
                             <attach>true</attach>
                         </configuration>
@@ -125,7 +122,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>${maven-gpg-plugin.version}</version>
+                        <version>1.6</version>
                         <executions>
                             <execution>
                                 <id>oss</id>
@@ -139,7 +136,7 @@
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>${nexus-staging-maven-plugin.version}</version>
+                        <version>1.6.8</version>
                         <extensions>true</extensions>
                         <configuration>
                             <serverId>oss</serverId>
@@ -152,24 +149,18 @@
         </profile>
     </profiles>
 
-    <issueManagement>
-        <system>GitHub Issue</system>
-        <url>https://github.com/geemu/commons/issues</url>
-    </issueManagement>
+    <!--<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<以下配置后续无需改动>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
 
+    <!-- 协议 -->
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
         </license>
     </licenses>
 
-    <scm>
-        <connection>scm:git@github.com:geemu/commons.git</connection>
-        <developerConnection>scm:git@github.com:geemu/commons.git</developerConnection>
-        <url>git@github.com:geemu/commons.git</url>
-    </scm>
-
+    <!-- 开发者 -->
     <developers>
         <developer>
             <name>FangMing.Chen</name>
@@ -183,10 +174,33 @@
         </developer>
     </developers>
 
+    <!-- 贡献者 -->
     <contributors>
         <contributor>
             <name>FangMing.Chen</name>
         </contributor>
     </contributors>
+
+    <!-- 软件配置管理 -->
+    <scm>
+        <connection>scm:git:git@github.com:geemu/commons.git</connection>
+        <developerConnection>scm:git:git@github.com:geemu/commons.git</developerConnection>
+        <url>https://github.com/geemu/commons.git</url>
+        <tag>${scm.tag.version}</tag>
+    </scm>
+
+    <!-- 问题管理 -->
+    <issueManagement>
+        <system>GitHub Issue</system>
+        <url>https://github.com/geemu/commons/issues</url>
+    </issueManagement>
+
+    <!-- 发布仓库地址 -->
+    <repositories>
+        <repository>
+            <id>GitHub Release Repository</id>
+            <url>https://github.com/geemu/commons/releases/</url>
+        </repository>
+    </repositories>
 
 </project>
