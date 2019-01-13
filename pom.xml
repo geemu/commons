@@ -201,8 +201,8 @@
 
     <!-- 软件配置管理 -->
     <scm>
-        <connection>scm:git@github.com:geemu/commons.git</connection>
-        <developerConnection>scm:git@github.com:geemu/commons.git</developerConnection>
+        <connection>scm:git:git@github.com:geemu/commons.git</connection>
+        <developerConnection>scm:git:git@github.com:geemu/commons.git</developerConnection>
         <url>https://github.com/geemu/commons.git</url>
         <tag>${scm.tag.version}</tag>
     </scm>
