@@ -63,24 +63,6 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-            <!-- 生成Javadoc -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.0.1</version>
-                <configuration>
-                    <charset>UTF-8</charset>
-                    <encoding>UTF-8</encoding>
-                    <docencoding>UTF-8</docencoding>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 
@@ -88,16 +70,6 @@
     <profiles>
         <profile>
             <id>release</id>
-            <distributionManagement>
-                <snapshotRepository>
-                    <id>oss</id>
-                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-                </snapshotRepository>
-                <repository>
-                    <id>oss</id>
-                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-                </repository>
-            </distributionManagement>
             <build>
                 <plugins>
                     <!-- 生成源码包 -->
@@ -110,7 +82,7 @@
                         </configuration>
                         <executions>
                             <execution>
-                                <id>oss</id>
+                                <id>attach-sources</id>
                                 <phase>package</phase>
                                 <goals>
                                     <goal>jar-no-fork</goal>
@@ -118,14 +90,33 @@
                             </execution>
                         </executions>
                     </plugin>
-                    <!-- Gpg Signature 签名 -->
+                    <!-- 生成Javadoc -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.0.1</version>
+                        <configuration>
+                            <charset>UTF-8</charset>
+                            <encoding>UTF-8</encoding>
+                            <docencoding>UTF-8</docencoding>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- Jar包签名 -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
                         <version>1.6</version>
                         <executions>
                             <execution>
-                                <id>oss</id>
+                                <id>sign-artifacts</id>
                                 <phase>verify</phase>
                                 <goals>
                                     <goal>sign</goal>
@@ -133,13 +124,14 @@
                             </execution>
                         </executions>
                     </plugin>
+                    <!-- oss -->
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
                         <version>1.6.8</version>
                         <extensions>true</extensions>
                         <configuration>
-                            <serverId>oss</serverId>
+                            <serverId>release</serverId>
                             <nexusUrl>https://oss.sonatype.org/</nexusUrl>
                             <autoReleaseAfterClose>true</autoReleaseAfterClose>
                         </configuration>
@@ -150,6 +142,18 @@
     </profiles>
 
     <!--<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<以下配置后续无需改动>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+
+    <!-- Maven仓库 -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>release</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>release</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
     <!-- 协议 -->
     <licenses>
@@ -183,9 +187,9 @@
 
     <!-- 软件配置管理 -->
     <scm>
-        <connection>scm:git:git@github.com:geemu/commons.git</connection>
-        <developerConnection>scm:git:git@github.com:geemu/commons.git</developerConnection>
-        <url>https://github.com/geemu/commons.git</url>
+        <connection>scm:git@github.com:geemu/commons.git</connection>
+        <developerConnection>scm:git@github.com:geemu/commons.git</developerConnection>
+        <url>git@github.com:geemu/commons.git</url>
         <tag>${scm.tag.version}</tag>
     </scm>
 
