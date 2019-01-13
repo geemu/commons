@@ -9,9 +9,9 @@
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
-    <name>commons</name>
+    <name>${project.artifactId}</name>
     <description>常用Java工具类</description>
-    <url>https://github.com/geemu/commons-parent/</url>
+    <url>https://github.com/geemu/commons</url>
 
     <!-- 项目模块 -->
     <modules>
@@ -199,7 +199,7 @@
     <repositories>
         <repository>
             <id>GitHub Release Repository</id>
-            <url>https://github.com/geemu/commons/releases/</url>
+            <url>https://github.com/geemu/commons/releases</url>
         </repository>
     </repositories>
 
