@@ -72,10 +72,6 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
-            <properties>
-                <gpg.executable>gpg</gpg.executable>
-                <gpg.passphrase>3A8B46E1484CD738A007FF9025C05D809073D230</gpg.passphrase>
-            </properties>
             <build>
                 <plugins>
                     <!-- 生成源码包 -->
