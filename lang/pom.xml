@@ -5,7 +5,7 @@
 
 
     <artifactId>lang</artifactId>
-    <version>1.0.0</version>
+    <version>0.0.1</version>
     <packaging>jar</packaging>
 
     <name>${project.artifactId}</name>
@@ -18,8 +18,63 @@
         <version>1.0.0</version>
     </parent>
 
+    <!--<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<以下配置后续无需改动>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
 
+    <!-- Maven仓库 -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>oss</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>oss</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+    <!-- 协议 -->
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <!-- 开发者 -->
+    <developers>
+        <developer>
+            <name>FangMing.Chen</name>
+            <id>CFM</id>
+            <organization/>
+            <email>cfmmail@sina.com</email>
+            <timezone>+8</timezone>
+            <roles>
+                <role>Java Developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <!-- 软件配置管理 -->
     <scm>
-        <tag>1.0.0.RELEASE</tag>
+        <connection>scm:git:git@github.com:geemu/commons.git</connection>
+        <developerConnection>scm:git:git@github.com:geemu/commons.git</developerConnection>
+        <url>https://github.com/geemu/commons</url>
+        <tag>1.0.0</tag>
     </scm>
+
+    <!-- 问题管理 -->
+    <issueManagement>
+        <system>GitHub Issue</system>
+        <url>https://github.com/geemu/commons/issues</url>
+    </issueManagement>
+
+    <!-- 发布仓库地址 -->
+    <repositories>
+        <repository>
+            <id>GitHub Release Repository</id>
+            <url>https://github.com/geemu/commons/releases</url>
+        </repository>
+    </repositories>
+
 </project>
